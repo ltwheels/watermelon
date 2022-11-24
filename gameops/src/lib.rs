@@ -53,14 +53,14 @@
         id_list
     }
 
-    async fn get_game(id: String, store: String) -> Game
+   fn get_game(id: String, store: String) -> Game
     {
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
         if store == "Steam"
         {
             let res: String = client.get(STEAM_API_PATH.to_owned())
                                     .query(&[("appids", &id)])
-                                    .send().await.unwrap().text().await.unwrap();
+                                    .send().unwrap().text().unwrap();
             let jsn: Value = serde_json::from_str(&res).unwrap();
             
             let name: String = jsn[id.to_owned()]["data"]["name"].to_string();
@@ -79,7 +79,7 @@
         }
     }
 
-    pub async fn setup_games() -> Vec<Game>
+    pub fn setup_games() -> Vec<Game>
     {
         let mut games: Vec<Game> = Vec::new();
         let steamids: Vec<String> = get_steamids();
@@ -87,14 +87,14 @@
 
         for id in steamids
         {
-        let g: Game =  get_game(id,   String::from("Steam")).await;
+        let g: Game =  get_game(id,   String::from("Steam"));
         games.push(g);
         }
 
-        for id in egsids
+        for _id in egsids
         {
-            let g: Game = get_game(id, String::from("EGS")).await;
-            games.push(g);
+            //let g: Game = get_game(id, String::from("EGS")).await;
+            //games.push(g);
         }
 
         games
