@@ -63,7 +63,8 @@
                                     .send().unwrap().text().unwrap();
             let jsn: Value = serde_json::from_str(&res).unwrap();
             
-            let name: String = jsn[id.to_owned()]["data"]["name"].to_string();
+            let mut name: String = jsn[id.to_owned()]["data"]["name"].to_string();
+            name = name[1..name.len()-1].to_owned();
 
             let g = Game {
                 name: name,

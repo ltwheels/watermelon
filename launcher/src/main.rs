@@ -36,10 +36,9 @@ impl eframe::App for GameLauncher
         ScrollArea::vertical().show(ui, |ui|{
           for g in &self.games 
           {
-            let title = g.name.replace("\"", "");
-  
+            
             ui.add_space(PADDING);
-            ui.label(title);
+            ui.label(&g.name);
             ui.with_layout(Layout::right_to_left(Align::TOP), |ui|
             {
               if ui.button("Launch Game").clicked()
@@ -47,7 +46,7 @@ impl eframe::App for GameLauncher
                 g.launch();
               }
             });
-            
+            ui.add_space(PADDING);
             ui.add(Separator::default());
   
           }
