@@ -1,15 +1,10 @@
-
-
 use eframe::egui;
 use gameops::{Game, setup_games};
-
-//let games: Vec<Game> = setup_games().await;
 
 fn main() 
 {
   let native_options = eframe::NativeOptions::default();
   eframe::run_native("Watermelon Game Launcher", native_options, Box::new(|cc| Box::new(GameLauncher::new(cc))));
-
 }
 
 #[derive(Default)]
@@ -43,7 +38,6 @@ impl eframe::App for GameLauncher
             g.launch();
           }
         }
-        
       });   
   }
 }
