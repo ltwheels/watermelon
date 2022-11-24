@@ -1,5 +1,7 @@
-use eframe::egui;
+use eframe::egui::{self, Align, Layout, ScrollArea, Separator};
 use gameops::{Game, setup_games};
+
+const PADDING: f32 = 5.0;
 
 fn main() 
 {
@@ -30,14 +32,27 @@ impl eframe::App for GameLauncher
   {
     egui::CentralPanel::default().show(ctx, |ui| 
       {
-        for g in &self.games 
-        {
-          let title = g.name.replace("\"", "");
-          if ui.button(title).clicked()
+
+        ScrollArea::vertical().show(ui, |ui|{
+          for g in &self.games 
           {
-            g.launch();
+            let title = g.name.replace("\"", "");
+  
+            ui.add_space(PADDING);
+            ui.label(title);
+            ui.with_layout(Layout::right_to_left(Align::TOP), |ui|
+            {
+              if ui.button("Launch Game").clicked()
+              {
+                g.launch();
+              }
+            });
+            
+            ui.add(Separator::default());
+  
           }
-        }
+        });
+
       });   
   }
 }
