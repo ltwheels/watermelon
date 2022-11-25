@@ -9,7 +9,6 @@ fn main()
   eframe::run_native("Watermelon Game Launcher", native_options, Box::new(|cc| Box::new(GameLauncher::new(cc))));
 }
 
-#[derive(Default)]
 struct GameLauncher{
   games: Vec<Game>
 }
@@ -38,6 +37,7 @@ impl eframe::App for GameLauncher
           {
             
             ui.add_space(PADDING);
+            ui.label(&g.store);
             ui.label(&g.name);
             ui.with_layout(Layout::right_to_left(Align::TOP), |ui|
             {
