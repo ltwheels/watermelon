@@ -10,7 +10,6 @@ const STEAM_PATH_WINDOWS: &str = "C:\\Program Files (x86)\\Steam\\steamapps";
 const STEAM_RUNGAME_STRING: &str =  "steam://rungameid/";
 const STEAM_API_PATH: &str = "http://store.steampowered.com/api/appdetails/";
 
-
 const EPIC_PATH_WINDOWS: &str = "C:\\Program Files\\Epic Games";
 const EPIC_GAMES_LAUNCH_PREFIX: &str = "com.epicgames.launcher://apps/";
 const EPIC_GAMES_LAUNCH_SUFFIX: &str = "?action=launch&silent=true";
@@ -21,6 +20,7 @@ pub struct Game
     pub appid: String, 
     pub store: String,
 }
+
 impl Game {
     pub fn  launch(&self)
     {
